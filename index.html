@@ -3,128 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Special One | NK Digital</title>
+    <title>A Special Surprise | NK Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #ff4d6d;
             --bg: #fff0f3;
-            --text: #4a4a4a;
+            --glass: rgba(255, 255, 255, 0.85);
         }
 
         body {
             margin: 0;
+            background: var(--bg);
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background: var(--bg);
-            font-family: 'Poppins', sans-serif;
-            overflow-x: hidden;
         }
 
-        /* Heart Animation Background */
+        /* Animated Background */
         .heart {
             position: absolute;
             color: var(--primary);
             animation: float 5s linear infinite;
-            opacity: 0.6;
+            opacity: 0.5;
             z-index: 1;
         }
-
         @keyframes float {
-            0% { transform: translateY(110vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(110vh) scale(0.5); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
-        .card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(15px);
-            padding: 30px;
-            border-radius: 30px;
-            box-shadow: 0 20px 50px rgba(255, 77, 109, 0.15);
+        /* Page Container */
+        .page {
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-align: center;
+            padding: 30px;
             width: 85%;
             max-width: 400px;
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
             z-index: 10;
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            border: 1px solid white;
+            animation: fadeIn 0.8s ease-in-out;
         }
 
-        /* Photo Frame Styling */
-        .photo-container {
-            width: 150px;
-            height: 150px;
-            margin: 0 auto 20px;
-            border-radius: 50%;
-            border: 5px solid white;
-            box-shadow: 0 10px 20px rgba(255, 77, 109, 0.2);
-            overflow: hidden;
-            background: #eee;
+        .active { display: flex; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .photo-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Ensures photo isn't stretched */
-        }
-
-        h1 { color: var(--primary); font-size: 1.8rem; margin: 10px 0; }
+        h1 { font-family: 'Dancing Script', cursive; color: var(--primary); font-size: 2.5rem; }
         
-        #typewriter {
-            font-size: 1rem;
-            color: var(--text);
-            line-height: 1.6;
-            min-height: 60px;
-            margin-top: 15px;
+        /* Photo Frame */
+        .photo-frame {
+            width: 200px;
+            height: 200px;
+            border-radius: 20px;
+            border: 8px solid white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Typing Effect Container */
+        #typing-box {
+            min-height: 120px;
             font-style: italic;
+            color: #444;
+            line-height: 1.6;
         }
 
         .btn {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 12px 30px;
             border-radius: 50px;
             cursor: pointer;
             font-weight: bold;
             margin-top: 20px;
             transition: 0.3s;
         }
+        .btn:hover { transform: scale(1.05); background: #c9184a; }
 
-        .btn.hidden { display: none; }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <div class="photo-container">
-            <img src="1770649455644.jpg" alt="Birthday Girl">
-        </div>
+    <div id="page1" class="page active">
+        <h1>For You...</h1>
+        <p>I have a small surprise waiting inside.</p>
+        <button class="btn" onclick="nextPage(2)">Open Surprise ✉️</button>
+    </div>
 
+    <div id="page2" class="page">
+        <h1>My Favorite Person</h1>
+        <div class="photAAAAAo-frame">
+            <img src="p" alt="Beautiful Moment">
+        </div>
+        <p>Just looking at this makes me smile.</p>
+        <button class="btn" onclick="nextPage(3)">Next ✨</button>
+    </div>
+
+    <div id="page3" class="page">
+        <h1>My Heart Says...</h1>
+        <div id="typing-box"></div>
+        <button class="btn" id="msgNext" style="display:none;" onclick="nextPage(4)">Final Surprise 🎁</button>
+    </div>
+
+    <div id="page4" class="page">
         <h1>Happy Birthday! 🎂</h1>
-        
-        <div id="typewriter"></div>
-        
-        <button class="btn" id="startBtn" onclick="startTyping()">Click for a Message ❤️</button>
+        <p>May your day be filled with endless joy and love.</p>
+        <p style="font-size: 0.8rem; margin-top: 40px; color: #888;">
+            Created with ❤️ by <br> <strong>NK Digital Services</strong>
+        </p>
+        <button class="btn" onclick="location.reload()">See Again</button>
     </div>
 
     <script>
-        const message = "Every day with you feels like a celebration, but today is extra special. You are beautiful, kind, and the best thing that ever happened to me. Happy Birthday, my love! ❤️";
-        const speed = 50;
-        let i = 0;
+        const message = "Happy Birthday to the one who owns my heart. You aren't just my partner; you are my best friend and my greatest inspiration. May this year bring you as much happiness as you give to me every single day. I love you forever! ❤️";
+        let charIndex = 0;
 
-        function startTyping() {
-            document.getElementById('startBtn').classList.add('hidden');
-            typeWriter();
-        }
+        function nextPage(pageNumber) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            // Show selected page
+            document.getElementById('page' + pageNumber).classList.add('active');
 
-        function typeWriter() {
-            if (i < message.length) {
-                document.getElementById("typewriter").innerHTML += message.charAt(i);
-                i++;
-                setTimeout(typeWriter, speed);
+            if (pageNumber === 3) {
+                startTyping();
             }
         }
 
+        function startTyping() {
+            if (charIndex < message.length) {
+                document.getElementById("typing-box").innerHTML += message.charAt(charIndex);
+                charIndex++;
+                setTimeout(startTyping, 50);
+            } else {
+                document.getElementById("msgNext").style.display = "block";
+            }
+        }
+
+        // Floating Hearts Background
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
@@ -137,4 +169,5 @@
         setInterval(createHeart, 400);
     </script>
 </body>
-</html>
+    </html>
+    
